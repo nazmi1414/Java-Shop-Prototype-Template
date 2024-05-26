@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Item</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">Edit Item</h1>
+    <form method="post" th:action="@{/shops/menu-item/update}" th:object="${menuItem}">
+        <input type="hidden" name="shopId" th:value="${menuItem.shopId}" />
+        <input type="hidden" name="id" th:value="${menuItem.id}" />
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" th:value="${menuItem.name}" />
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description" name="description" th:value="${menuItem.description}" />
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" class="form-control" id="price" name="price" th:value="${menuItem.price}" />
+        </div>
+        <div style="text-align: center;">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <input action="action" class="btn btn-secondary" onclick="window.history.go(-1); return false;"
+                   type="submit" value="Cancel"/>
+        </div>
+    </form>
+</div>
+</body>
+</html>

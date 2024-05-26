@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${'Shop: ' + shop.name}"></title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5" th:text="${shop.name}"></h1>
+    <ul class="nav">
+        <li class="nav-item">
+            <a type="button" class="btn btn-primary" aria-current="page" th:href="${'/shops/' + shop.id + '/create-menu-item'}">Add New Item</a>
+        </li>
+    </ul>
+    <ul class="list-group mt-3">
+        <li th:each="item: ${shop.menuItems}" class="list-group-item">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 th:text="${item.name}"></h5>
+                    <p th:text="${item.description}"></p>
+                </div>
+                <div class="col-md-6 text-right">
+                    <span th:text="${'Price: ' + item.price}"></span>
+
+                <form method="POST" th:action="@{/shops/menu-item/delete}">
+
+                    <a class="btn btn-secondary" th:href="@{/shops/menu-item/edit/{id}(id=${item.id})}">Edit</a>
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="id" th:value="${item.id}">
+                    <input type="hidden" name="shopId" th:value="${shop.id}">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+
+                </form>
+
+                </div></div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
